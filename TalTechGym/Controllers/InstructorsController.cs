@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TalTechGym.Data;
+using System.Linq;
 using TalTechGym.Models;
 using TalTechGym.Models.GymViewModels;
 
@@ -28,12 +29,7 @@ namespace TalTechGym.Controllers
                 .Include(i => i.OfficeAssignment)
                 .Include(i => i.CourseAssignments)
                 .ThenInclude(i => i.Course)
-                .ThenInclude(i => i.Enrollments)
-                .ThenInclude(i => i.Student)
-                .Include(i => i.CourseAssignments)
-                .ThenInclude(i => i.Course)
                 .ThenInclude(i => i.Department)
-                .AsNoTracking()
                 .OrderBy(i => i.LastName)
                 .ToListAsync();
 
@@ -48,7 +44,7 @@ namespace TalTechGym.Controllers
             if (courseID != null)
             {
                 ViewData["CourseID"] = courseID.Value;
-                var selectedCourse = viewModel.Courses.Where(x => x.CourseID == courseID).Single();
+                var selectedCourse = viewModel.Courses.Single(x => x.CourseID == courseID);
                 await _context.Entry(selectedCourse).Collection(x => x.Enrollments).LoadAsync();
                 foreach (Enrollment enrollment in selectedCourse.Enrollments)
                 {

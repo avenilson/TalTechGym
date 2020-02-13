@@ -139,7 +139,7 @@ namespace TalTechGym.Data
                     InstructorID = instructors.Single(i => i.LastName == "Koit").ID
                     },
                 new CourseAssignment {
-                    CourseID = courses.Single(c => c.Title == "Table tennis" ).CourseID,
+                    CourseID = courses.Single(c => c.Title == "Table Tennis" ).CourseID,
                     InstructorID = instructors.Single(i => i.LastName == "Koit").ID
                     }
             };
@@ -164,7 +164,7 @@ namespace TalTechGym.Data
                     },
                     new Enrollment {
                     StudentID = students.Single(s => s.LastName == "Nilson").ID,
-                    CourseID = courses.Single(c => c.Title == "Table tennis" ).CourseID,
+                    CourseID = courses.Single(c => c.Title == "Table Tennis" ).CourseID,
                     Grade = Grade.B
                     },
                     new Enrollment {
